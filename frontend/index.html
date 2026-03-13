@@ -1,0 +1,17 @@
+<input id="idea" placeholder="Escreva a ideia do app">
+<button onclick="generateApp()">Gerar App</button>
+
+<pre id="output"></pre>
+
+<script>
+async function generateApp() {
+  const idea = document.getElementById("idea").value;
+  const res = await fetch("http://localhost:3000/generate", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ prompt: idea })
+  });
+  const data = await res.json();
+  document.getElementById("output").innerText = data.code;
+}
+</script>
